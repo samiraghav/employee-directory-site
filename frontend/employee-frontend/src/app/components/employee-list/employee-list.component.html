@@ -1,0 +1,42 @@
+<div class="form-title"> Employee List(Refresh after updates)
+
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+    <input placeholder="Search name" class="input" [(ngModel)]="searchText" (input)="onSearch()" style="max-width:280px"/>
+    <input placeholder="Filter dept" class="input" [(ngModel)]="deptFilter" (input)="onSearch()" style="max-width:220px"/>
+    <button class="btn btn-ghost" (click)="load()">Reset</button>
+    <div style="flex:1"></div>
+    <div class="small-muted">
+        Total: <strong>{{ employees.length || 0 }}</strong>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Email</th>
+          <th>Join Date</th>
+          <th style="width:160px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of employees">
+          <td>{{ e.name }}</td>
+          <td>{{ e.department }}</td>
+          <td>{{ e.email }}</td>
+          <td class="small-muted">{{ e.joinDate }}</td>
+          <td>
+            <button class="action-btn action-edit" (click)="onEdit(e)">Edit</button>
+            <button class="action-btn action-delete" (click)="onDelete(e.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!employees?.length && !loading" class="empty">No employees yet.</div>
+  <div *ngIf="loading" class="empty">Loading…</div>
+  <div *ngIf="error" class="empty" style="color:#ffb4b4">{{ error }}</div>
+</div>

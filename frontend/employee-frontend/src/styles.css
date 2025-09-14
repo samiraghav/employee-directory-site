@@ -1,0 +1,161 @@
+/* ===========================
+   Global + layout
+   =========================== */
+:root{
+  --bg: #0f1720;
+  --card: #0f1724;
+  --muted: #94a3b8;
+  --accent: #2563eb;
+  --accent-2: #1e293b;
+  --white: #ffffff;
+  --danger: #dc2626;
+  --surface: #0b1220;
+  --soft: rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+html,body,#root {height:100%}
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #2c5aab 0%, #1b579d 60%);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:0;
+}
+
+/* centered container with responsive width */
+.app-container{
+  max-width:1200px;
+  margin:0px auto;
+  padding:150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* header */
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand-logo {
+  width:46px;
+  height:46px;
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:white;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+.brand-title {font-size:22px; font-weight:700; letter-spacing: -0.2px;}
+.brand-sub {font-size:12px; color:var(--muted); margin-top:2px}
+
+/* layout grid */
+.layout {
+  display:grid;
+  grid-template-columns: 360px 1fr;
+  gap:20px;
+}
+
+/* responsive */
+@media (max-width:900px){
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* cards */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  padding:18px;
+  border-radius:12px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+/* forms */
+.form-title { font-size:16px; font-weight:600; margin-bottom:12px; color:#e6eefc }
+.form-row { margin-bottom:10px; }
+label { display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
+.input, .select {
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));
+  color:var(--white);
+  outline:none;
+  font-size:14px;
+}
+.input:focus, .select:focus {
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+  border-color: rgba(37,99,235,0.7);
+}
+
+/* buttons */
+.row { display:flex; gap:8px; align-items:center; }
+.btn {
+  padding:9px 14px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+}
+.btn-primary {
+  background: linear-gradient(90deg,#2563eb,#06b6d4);
+  color:white;
+  box-shadow: 0 8px 28px rgba(37,99,235,0.18);
+}
+.btn-ghost {
+  background:transparent;
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.btn-danger {
+  background: linear-gradient(90deg,#ef4444,#dc2626);
+  color:white;
+}
+
+/* small helper */
+.kv { font-size:13px; color:var(--muted) }
+
+/* table */
+.table-wrap { overflow:auto; }
+.table { width:100%; border-collapse:collapse; min-width:720px; }
+.table thead tr th {
+  text-align:left; font-size:13px; padding:12px 12px; color:var(--muted);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));
+}
+.table tbody tr { border-top:1px solid rgba(255,255,255,0.02); }
+.table tbody tr td { padding:12px; vertical-align:middle; font-size:14px; color:#dbe7ff; }
+.small-muted { font-size:13px; color:var(--muted) }
+
+/* actions */
+.action-btn {
+  padding:6px 10px; border-radius:8px; border:none; cursor:pointer; font-weight:600; font-size:13px;
+}
+.action-edit { background:#f59e0b; color:#081021; }
+.action-delete { background:#ef4444; color:white; }
+
+/* empty state */
+.empty { padding:20px; text-align:center; color:var(--muted) }
+
+/* responsive tweaks */
+@media (max-width:720px){
+  .brand-title { font-size:18px }
+  .input { font-size:13px }
+  .table { min-width:600px }
+}

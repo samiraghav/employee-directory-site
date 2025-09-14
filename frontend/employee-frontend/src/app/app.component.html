@@ -1,0 +1,21 @@
+<div class="app-container">
+  <div class="header">
+    <div class="brand">
+      <div class="brand-logo">ED</div>
+      <div>
+        <div class="brand-title">Employee Directory</div>
+        <div class="brand-sub">Manage employees</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="card">
+      <app-employee-form [editModel]="editModel" (saved)="onSaved()"></app-employee-form>
+    </div>
+
+    <div class="card">
+      <app-employee-list (edit)="onEditRequested($event)" (changed)="onListChanged()"></app-employee-list>
+    </div>
+  </div>
+</div>
