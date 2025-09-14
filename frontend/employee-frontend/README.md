@@ -1,6 +1,6 @@
 # Employee Directory — Spring Boot + Angular
 
-A simple full-stack application that manages employees and supports CRUD operations with search and filter functionality. The project demonstrates a **Spring Boot backend** and an **Angular frontend** working together.
+A simple full-stack application that manages employees and supports CRUD operations with search and filter functionality. The project demonstrates a **Spring Boot backend(Maven)** and an **Angular frontend** working together.
 
 ---
 
