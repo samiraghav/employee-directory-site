@@ -1,59 +1,205 @@
-# EmployeeFrontend
+# Employee Directory — Spring Boot + Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.16.
+A simple full-stack application that manages employees and supports CRUD operations with search and filter functionality. The project demonstrates a **Spring Boot backend** and an **Angular frontend** working together.
 
-## Development server
+---
 
-To start a local development server, run:
+## Table of Contents
 
-```bash
-ng serve
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Backend (Spring Boot)](#backend-spring-boot)
+5. [Frontend (Angular)](#frontend-angular)
+6. [Validation & Error Handling](#validation--error-handling)
+7. [How to Run](#how-to-run)
+8. [Sample API Usage](#sample-api-usage)
+9. [Project Structure](#project-structure)
+10. [Deliverables](#deliverables)
+11. [Author](#author)
+
+---
+
+## Overview
+
+The **Employee Directory** application allows users to create, view, update, delete, and search employee records. It provides a clean REST API built with **Spring Boot** and a responsive web UI built with **Angular**.
+
+---
+
+## Features
+
+* Employee CRUD (Create, Read, Update, Delete)
+* Search employees by department and/or name (case-insensitive)
+* In-memory storage (with optional H2 + Spring Data JPA)
+* Angular UI with table view and reactive forms
+* Real-time UI updates after add/edit/delete
+* Input validation and error handling
+
+---
+
+## Tech Stack
+
+**Backend**
+
+* Spring Boot (Maven)
+* Java 17+
+* In-memory `Map<Long, Employee>` storage (bonus: H2 database + Spring Data JPA)
+
+**Frontend**
+
+* Angular CLI
+* TypeScript
+* HTML/CSS with Angular Forms
+
+---
+
+## Backend (Spring Boot)
+
+### Entity
+
+```java
+Employee {
+  Long id,
+  String name,
+  String department,
+  String email,
+  LocalDate joinDate
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### REST Endpoints
 
-## Code scaffolding
+* `POST   /api/employees` → Create employee
+* `GET    /api/employees` → List all employees
+* `GET    /api/employees/{id}` → Get employee by ID
+* `PUT    /api/employees/{id}` → Update employee
+* `DELETE /api/employees/{id}` → Delete employee
+* `GET    /api/employees/search?dept={dept}&name={name}` → Filter by department and/or name
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
+
+## Frontend (Angular)
+
+* **Employee Table**: displays employee list
+* **Employee Form**: add/edit employees
+* **Search Box**: filter by department or name
+* **Angular Service**: centralizes HTTP calls to backend
+* UI updates dynamically without page reload
+
+---
+
+## Validation & Error Handling
+
+* **Validation**:
+
+  * Required fields: `name`, `department`, `email`
+  * Email must be in valid format
+* **HTTP Status Codes**:
+
+  * `201 Created` → successful create
+  * `200 OK` → successful read/update
+  * `204 No Content` → successful delete
+  * `400 Bad Request` → invalid inputs
+  * `404 Not Found` → resource not found
+
+---
+
+## How to Run
+
+### Backend (Spring Boot)
 
 ```bash
-ng generate component component-name
+cd backend
+mvn clean install
+mvn spring-boot:run
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Backend will run on: `http://localhost:8080`
+
+### Frontend (Angular)
 
 ```bash
-ng generate --help
+cd frontend
+npm install
+ng serve -o
 ```
 
-## Building
+Frontend will run on: `http://localhost:4200`
 
-To build the project run:
+---
+
+## Sample API Usage
+
+### Create Employee
 
 ```bash
-ng build
+curl -X POST http://localhost:8080/api/employees \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","department":"IT","email":"john@example.com","joinDate":"2025-09-14"}'
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Get All Employees
 
 ```bash
-ng test
+curl http://localhost:8080/api/employees
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Search by Department
 
 ```bash
-ng e2e
+curl http://localhost:8080/api/employees/search?dept=IT
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Update Employee
 
-## Additional Resources
+```bash
+curl -X PUT http://localhost:8080/api/employees/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Smith","department":"HR","email":"smith@example.com","joinDate":"2025-09-14"}'
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Delete Employee
+
+```bash
+curl -X DELETE http://localhost:8080/api/employees/1
+```
+
+---
+
+## Project Structure
+
+```
+/EmployeeDirectory
+├── backend/          # Spring Boot project
+│   ├── src/main/java/com/example/employees
+│   │   ├── controller/EmployeeController.java
+│   │   ├── model/Employee.java
+│   │   ├── service/EmployeeService.java
+│   │   └── ...
+│   └── pom.xml
+│
+└── frontend/         # Angular project
+    ├── src/app/
+    │   ├── components/employee-list/
+    │   ├── components/employee-form/
+    │   └── services/employee.service.ts
+    └── package.json
+```
+
+---
+
+## Deliverables
+
+* Spring Boot project (Maven)
+* Angular project (CLI)
+* Single GitHub repository / ZIP
+* README with setup steps + curl examples
+
+---
+
+## Author
+
+Maintainer: **samiraghav24**
+Email: `samiraghav24@gmail.com`
+
+---
